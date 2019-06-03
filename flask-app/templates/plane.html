@@ -1,0 +1,24 @@
+<html>
+  <body>
+    <form method="POST" action="">
+      <h1> 1. Enter make </h1>
+      <input type="text" name="make">
+      <h1> 2. Enter model </h1>
+      <input type="text" name="model">
+      <h1> 3. Enter age </h1>
+      <input type="text" name="age">
+      <h1> 4. Enter seats </h1>
+      <input type="text" name="seats">
+      <input type="submit" value="add">
+    </form>
+
+    {% if id is not none %}
+      {{id}}
+      {{make}}
+      {{model}}
+      {{age}}
+      {{seats}}
+    {% endif %}
+
+  </body>
+</html>

@@ -1,0 +1,14 @@
+<html>
+  <body>
+    <form method="POST" action="">
+      <h1> 1. Enter flight number </h1>
+      <input type="text" name="flightid">
+      <input type="submit" value="view">
+    </form>
+    <p> The number of available seats is: </p>
+    {% if difference is not none %}
+      {{difference}}
+    {% endif %}
+
+  </body>
+</html>

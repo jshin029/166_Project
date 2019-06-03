@@ -1,0 +1,13 @@
+body,html {
+	overflow-x: hidden;
+	margin: 0;
+}
+
+#main-hero {
+  background-color: red;
+  background-image: url("../background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}

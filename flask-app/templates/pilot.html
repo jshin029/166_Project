@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <form method="POST" action="">
+      <h1> 1. Enter full name </h1>
+      <input type="text" name="full_name">
+      <h1> 2. Enter nationality </h1>
+      <input type="text" name="nationality">
+      <input type="submit" value="add">
+    </form>
+
+    {% if id is not none %}
+      {{id}}
+      {{full_name}}
+      {{nationality}}
+    {% endif %}
+
+  </body>
+</html>

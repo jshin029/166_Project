@@ -1,0 +1,30 @@
+CREATE LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION ReturnNext()
+RETURNS trigger AS
+$BODY$
+BEGIN
+NEW.id := nextval('plane_id_seq');
+return NEW;
+END;
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+DROP TRIGGER IF EXISTS ReturnNext ON Plane;
+CREATE TRIGGER ReturnNext BEFORE INSERT
+ON Plane FOR EACH ROW
+EXECUTE PROCEDURE ReturnNext();
+
+CREATE OR REPLACE FUNCTION NextPilotID()
+RETURNS trigger AS
+$BODY$
+BEGIN
+NEW.id := nextval('pilot_id_seq');
+return NEW;
+END;
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+DROP TRIGGER IF EXISTS NextPilotID ON Pilot;
+CREATE TRIGGER NextPilotID BEFORE INSERT
+ON Pilot FOR EACH ROW
+EXECUTE PROCEDURE NextPilotID();

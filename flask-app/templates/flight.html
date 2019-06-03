@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <form method="POST" action="">
+      <h1> 1. Enter Cost </h1>
+      <input type="text" name="cost">
+      <h1> 2. Enter num sold </h1>
+      <input type="text" name="num_sold">
+      <h1> 3. Enter num stops </h1>
+      <input type="text" name="num_stops">
+      <h1> 4. Enter actual departure date </h1>
+      <input type="text" name="actual_departure_date">
+      <h1> 5. Enter actual arrival date </h1>
+      <input type="text" name="actual_arrival_date">
+      <h1> 6. Enter arrival airport </h1>
+      <input type="text" name="arrival_airport">
+      <h1> 7. Enter departure airport </h1>
+      <input type="text" name="departure_airport">
+      <input type="submit" value="add">
+    </form>
+
+    {% if id is not none %}
+      {{id}}
+      {{cost}}
+      {{num_sold}}
+      {{num_stops}}
+      {{actual_departure_date}}
+      {{actual_arrival_date}}
+      {{arrival_airport}}
+      {{departure_airport}}
+    {% endif %}
+
+  </body>
+</html>
