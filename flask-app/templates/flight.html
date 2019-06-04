@@ -1,33 +1,140 @@
 <html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<style>
+#main-flight {
+    background-color: 33D1FF;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 120vh;
+    width: 100vw;
+  }
+  body,html {
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  .input {
+    background-color: 33D1FF;
+    border: 2px solid white;
+    border-radius: 20px;
+    width: 100%;
+    height: 120px;
+    text-align = center;
+  }
+  .gap {
+    padding: 40px;
+  }
+
+  .text {
+    font-size: 20px;
+    font-color: white;
+  }
+  .fill {
+    padding: 20px;
+  }
+
+
+</style>
   <body>
+    <div id="main-flight">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 gap">
+    </div>
     <form method="POST" action="">
-      <h1> 1. Enter Cost </h1>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 wrapper" align=center>
+      <div class ="row" align=center>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 1. Enter Cost </p>
       <input type="text" name="cost">
-      <h1> 2. Enter num sold </h1>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 2. Enter num sold</p>
       <input type="text" name="num_sold">
-      <h1> 3. Enter num stops </h1>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 3. Enter num stops.  </p>
       <input type="text" name="num_stops">
-      <h1> 4. Enter actual departure date </h1>
+      </div>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+
+      <div class ="row" align=center>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 4. Enter actual departure date </p>
       <input type="text" name="actual_departure_date">
-      <h1> 5. Enter actual arrival date </h1>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 5. Enter actual arrival date </p>
       <input type="text" name="actual_arrival_date">
-      <h1> 6. Enter arrival airport </h1>
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 6. Enter arrival airport</p>
       <input type="text" name="arrival_airport">
-      <h1> 7. Enter departure airport </h1>
+      </div>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+
+      <div class ="row" align=center>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 7. Enter departure airport</p>
       <input type="text" name="departure_airport">
-      <input type="submit" value="add">
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 8. Enter pilot id</p>
+      <input type="text" name="pilot_id">
+      </div>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="col-lg-2 col-xl-2 input">
+      <p class=text> 9. Enter plane id</p>
+      <input type="text" name="plane_id">
+      </div>
+      </div>
+
+    </div>
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 fill" align=center>
+        <input type="submit" value="add">
+      </div>
     </form>
 
     {% if id is not none %}
-      {{id}}
-      {{cost}}
-      {{num_sold}}
-      {{num_stops}}
-      {{actual_departure_date}}
-      {{actual_arrival_date}}
-      {{arrival_airport}}
-      {{departure_airport}}
+      id: {{id}}
+      cost: {{cost}}
+      num sold: {{num_sold}}
+      num stops: {{num_stops}}
+      actual departure date: {{actual_departure_date}}
+      actual arrival date: {{actual_arrival_date}}
+      arrival airport: {{arrival_airport}}
+      departure airport: {{departure_airport}}
+      <br></br>
+      id: {{id2}}
+      pilot id: {{pilot_id}}
+      plane id: {{plane_id}}
     {% endif %}
-
+  </div>
   </body>
 </html>

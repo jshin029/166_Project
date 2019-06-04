@@ -79,6 +79,9 @@ def flight():
             arrival_airport = request.form.get("arrival_airport")
             departure_airport = request.form.get("departure_airport")
 
+            pilot_id = request.form.get("pilot_id")
+            plane_id = request.form.get("plane_id")
+
             query =  "INSERT INTO Flight (fnum, cost, num_sold, num_stops, actual_departure_date, actual_arrival_date, arrival_airport, departure_airport) Values (nextval('flight_id_seq'), '"
             query += cost
             query += "', '"
@@ -99,7 +102,17 @@ def flight():
             result = result_set.fetchone()
             id = result[0]
 
-            return render_template("flight.html", id=id, cost=cost, num_sold=num_sold, num_stops=num_stops, actual_departure_date=actual_departure_date, actual_arrival_date=actual_arrival_date, arrival_airport=arrival_airport, departure_airport=departure_airport)
+            squery = "INSERT INTO FlightInfo (fiid, flight_id, pilot_id, plane_id) Values (nextval('flightinfo_id_seq'), (SELECT max(F.fnum) FROM Flight F), '"
+            squery += pilot_id
+            squery += "', '"
+            squery += plane_id
+            squery += "') RETURNING *;"
+
+            result_set2 = db.engine.execute(squery)
+            result2 = result_set2.fetchone()
+            id2 = result[0]
+
+            return render_template("flight.html", id=id, cost=cost, num_sold=num_sold, num_stops=num_stops, actual_departure_date=actual_departure_date, actual_arrival_date=actual_arrival_date, arrival_airport=arrival_airport, departure_airport=departure_airport, id2=id2, pilot_id=pilot_id, plane_id=plane_id)
 
         except Exception as e:
             print("Failed to add flight")
@@ -169,35 +182,6 @@ def bookflight():
 
             return render_template("bookflight.html", id=id, cid=cid, fid=fid, status=status)
 
-
-            # query = "INSERT INTO Reservation (rnum, cid, fid, status) SELECT nextval('res_id_seq'), "
-            # query += cid
-            # query += ", "
-            # query += fid
-            # query += ", "
-            #
-            # query1 = "CASE WHEN (SELECT P.seats FROM Plane P WHERE P.id = (SELECT F.plane_id FROM FlightInfo F WHERE F.flight_id = "
-            # query1_2 = ")) > (SELECT num_sold FROM Flight F WHERE F.fnum = "
-            # query1_3 = ") THEN 'C' ELSE 'W' END;"
-            #
-            # query += query1
-            # query += fid
-            # query += query1_2
-            # query += fid
-            # query += query1_3
-            #
-            #
-            # # query2 = "UPDATE Flight SET num_sold = num_sold+1  WHERE fnum = "
-            # # query2 += fid
-            # # query2 += ";"
-            #
-            # result_set = con.execute(query)
-            # result = result_set.fetchone()
-            # id = result[0]
-
-            #db.engine.execute(query2)
-
-
         except Exception as e:
             print("Failed to book a flight")
             print(e)
@@ -259,7 +243,7 @@ def listyear():
 def countstatus():
     if request.form:
         try:
-            fnum= request.form.get("fnum")
+            fnum = request.form.get("fnum")
             status = request.form.get("status")
 
             query = "SELECT COUNT(*) FROM Reservation R WHERE R.fid = "
@@ -278,7 +262,36 @@ def countstatus():
             print(e)
     return render_template("countstatus.html")
 
+@app.route('/repairs', methods=["GET", "POST"])
+def repairs():
+    if request.method == "POST":
+        try:
+            id = request.form.get("id")
+            repair_date = request.form.get("repair_date")
+            repair_code = request.form.get("repair_code")
+            pilot_id = request.form.get("pilot_id")
+            plane_id = request.form.get("plane_id")
+            technician_id = request.form.get("technician_id")
 
+            query = "INSERT INTO Repairs (rid, repair_date, repair_code, pilot_id, plane_id, technician_id) Values (nextval('repair_id_seq'), '";
+            query += repair_code
+            query += "', '"
+            query += pilot_id
+            query += "', '"
+            query += plane_id
+            query += "', '"
+            query += technician_id
+            query += "') RETURNING *;"
+
+            result_set = db.engine.execute(query).fetchone()
+            id = result_set[0]
+
+            return render_template("repairs.html", id=id, repair_date=repair_date, repair_code=repair_code, pilot_id=pilot_id, plane_id=plane_id, technician_id=technician_id)
+
+        except Exception as e:
+            print("Failed to output list")
+            print(e)
+    return render_template("repairs.html")
 
 @app.route('/', methods=["GET", "POST"])
 def main():

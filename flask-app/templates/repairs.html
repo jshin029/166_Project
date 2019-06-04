@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <form method="POST" action="">
+      <h1> 1. Enter Repair Date </h1>
+      <input type="text" name="date">
+      <h1> 1. Enter Repair Code </h1>
+      <input type="text" name="code">
+      <h1> 1. Enter Pilot ID</h1>
+      <input type="text" name="pilot_id">
+      <h1> 1. Enter Plane ID </h1>
+      <input type="text" name="plane_id">
+      <h1> 1. Enter Technician ID </h1>
+      <input type="text" name="techid">
+      <input type="submit" value="view">
+    </form>
+
+    {% if id is not none %}
+    {{ id }}
+    {{ repair_date }}
+    {{ repair_code }}
+    {{ pilot_id }}
+    {{ plane_id }}
+    {{ technician_id }}
+    <br></br>
+    {% endif %}
+ String query = "INSERT INTO Repairs (rid, repair_date, repair_code, pilot_id, plane_id, technician_id) Values (nextval('repair_id_seq'), '";
+  </body>
+</html>

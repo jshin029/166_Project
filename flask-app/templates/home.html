@@ -2,10 +2,12 @@
   <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <style>
   #main-hero {
-      background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+      /* background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); */
+      background-image: url("/static/background.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       height: 100vh;
@@ -20,25 +22,43 @@
       border-radius: 20px;
       width: 180px;
       margin-top: 30px;
+      text-align: center;
+    }
+    .first_add {
+      background-color: white;
+      border-radius: 20px;
+      width: 180px;
+      text-align: center;
     }
     a {
     text-decoration: none;
-  }
+    }
+
+    .gap {
+      padding: 40px;
+    }
   </style>
   <body>
 
 
-  <div id="main-hero" align="center" style="padding-top: 200px;">
-    <div class="add"><a href="http://127.0.0.1:5000/plane" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Add Plane</a></div>
+  <div id="main-hero">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 gap">
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+    <div class="first_add"><a href="http://127.0.0.1:5000/plane" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Add Plane</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/pilot" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Add Pilot</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/flight" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Add Flight</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/flight" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Add Repairs</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/technician" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Add Technician</a></div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
     <div class="add"><a href="http://127.0.0.1:5000/bookflight" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Book Flight</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/listavailable" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Available Seats</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/listrepairs" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Repairs per Plane</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/listyear" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Repairs per Year</a></div>
     <div class="add"><a href="http://127.0.0.1:5000/countstatus" style="text-decoration:none; font-family: 'Roboto', sans-serif; font-size: 20px;">Total Status</a></div>
+    </div>
   </div>
   </body>
 </html>
