@@ -1,24 +1,108 @@
 <html>
-  <body>
-    <form method="POST" action="">
-      <h1> 1. Enter make </h1>
-      <input type="text" name="make">
-      <h1> 2. Enter model </h1>
-      <input type="text" name="model">
-      <h1> 3. Enter age </h1>
-      <input type="text" name="age">
-      <h1> 4. Enter seats </h1>
-      <input type="text" name="seats">
-      <input type="submit" value="add">
-    </form>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
 
-    {% if id is not none %}
-      {{id}}
-      {{make}}
-      {{model}}
-      {{age}}
-      {{seats}}
+<style>
+#main-flight {
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#EA5C54 ), color-stop(100%,#bb6dec)); /* Chrome,Safari4+*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 120vh;
+    width: 100vw;
+  }
+
+  body,html {
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  .input {
+    background-color: #32364A;
+    width: 100%;
+    height: 120px;
+    text-align = center;
+    border: 2px solid #393D52;
+  }
+  .gap {
+    padding: 40px;
+  }
+
+  .text {
+    font-size: 20px;
+    color: AFAFAF;
+  }
+  .fill {
+    padding: 20px;
+  }
+  .output {
+    color: white;
+  }
+  .inner {
+    background-color: #232633;
+  }
+
+  .submit {
+    border-width: 2px;
+    background-color: #232633;
+    border-radius: 20px;
+    border-color: #DC617F;
+    color: #DC617F;
+  }
+  .outer {
+    background-color: #232633;
+    width: 100%;
+    height: 120px;
+    text-align = center;
+  }
+
+  .temp {
+    background-color: #32364A;
+    border: 2px solid #393D52;
+  }
+</style>
+  <body>
+    <div id="main-flight">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 wrapper" align=center style="padding-top: 60px;">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 inner">
+    <form method="POST" action="">
+      <div class ="row" align=center>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
+      </div>
+      <div class="input">
+      <p class=text> 1. Enter make </p>
+      <input class="temp" type="text" name="make">
+      </div>
+
+      <div class="input">
+      <p class=text> 2. Enter model </p>
+      <input class="temp" type="text" name="model">
+      </div>
+
+      <div class="input">
+      <p class=text> 3. Enter age </p>
+      <input class="temp" type="text" name="age">
+      </div>
+
+      <div class="input">
+      <p class=text> 4. Enter seats</p>
+      <input class="temp" type="text" name="seats">
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 fill" text-align=center>
+        <input class="submit" type="submit" value="add" style="padding: 20px;">
+      </div>
+        </div>
+    </form>
+  </div>
+
+
+    {% if id != "error" %}
+      {{id}} {{make}} {{model}} {{age}} {{seats}}
     {% endif %}
 
+
+  </div>
   </body>
 </html>

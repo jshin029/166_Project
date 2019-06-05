@@ -141,6 +141,7 @@ CREATE TABLE Repairs
 	FOREIGN KEY (technician_id) REFERENCES Technician(id)
 );
 
+CREATE SEQUENCE schedule_id_seq  START WITH 2000;
 CREATE TABLE Schedule
 (
 	id INTEGER NOT NULL,

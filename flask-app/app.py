@@ -39,8 +39,10 @@ def plane():
             return render_template("plane.html", id=id, make=make, model=model, age=age, seats=seats)
 
         except Exception as e:
+            id = "One or more of the fields was incorrect or empty"
             print("Failed to add plane")
             print(e)
+            return render_template("plane.html", id=id)
     return render_template("plane.html")
 
 @app.route('/pilot', methods=["GET", "POST"])
@@ -59,12 +61,16 @@ def pilot():
             result_set = db.engine.execute(query)
             result = result_set.fetchone()
             id = result[0]
-
+            if full_name == "" or nationality == "":
+                id = "One or more of the fields was incorrect or empty"
+                return render_template("pilot.html", id=id)
             return render_template("pilot.html", id=id, full_name=full_name, nationality=nationality)
 
         except Exception as e:
+            id = "One or more of the fields was incorrect or empty"
             print("Failed to add pilot")
             print(e)
+            return render_template("pilot.html", id=id)
     return render_template("pilot.html")
 
 @app.route('/flight', methods=["GET", "POST"])
@@ -81,6 +87,16 @@ def flight():
 
             pilot_id = request.form.get("pilot_id")
             plane_id = request.form.get("plane_id")
+
+            id_1 = int(pilot_id)
+            id_2 = int(plane_id)
+
+            if id_1 > 250:
+                id="Please enter a valid pilot id between 1-250"
+                return render_template("flight.html", id=id)
+            elif id_2 > 66:
+                id="Please enter a valid plane id between 1-66"
+                return render_template("flight.html", id=id)
 
             query =  "INSERT INTO Flight (fnum, cost, num_sold, num_stops, actual_departure_date, actual_arrival_date, arrival_airport, departure_airport) Values (nextval('flight_id_seq'), '"
             query += cost
@@ -112,11 +128,15 @@ def flight():
             result2 = result_set2.fetchone()
             id2 = result[0]
 
+
+
             return render_template("flight.html", id=id, cost=cost, num_sold=num_sold, num_stops=num_stops, actual_departure_date=actual_departure_date, actual_arrival_date=actual_arrival_date, arrival_airport=arrival_airport, departure_airport=departure_airport, id2=id2, pilot_id=pilot_id, plane_id=plane_id)
 
         except Exception as e:
             print("Failed to add flight")
             print(e)
+            id="Please enter a valid pilot id between 1-250"
+            return render_template("flights.html", id=id)
     return render_template("flight.html")
 
 @app.route('/technician', methods=["GET", "POST"])
@@ -266,14 +286,25 @@ def countstatus():
 def repairs():
     if request.method == "POST":
         try:
-            id = request.form.get("id")
             repair_date = request.form.get("repair_date")
             repair_code = request.form.get("repair_code")
             pilot_id = request.form.get("pilot_id")
             plane_id = request.form.get("plane_id")
             technician_id = request.form.get("technician_id")
 
+            id_1 = int(pilot_id)
+            id_2 = int(plane_id)
+
+            if id_1 > 250:
+                id="Please enter a valid pilot id between 1-250"
+                return render_template("repairs.html", id=id)
+            elif id_2 > 66:
+                id="Please enter a valid plane id between 1-66"
+                return render_template("repairs.html", id=id)
+
             query = "INSERT INTO Repairs (rid, repair_date, repair_code, pilot_id, plane_id, technician_id) Values (nextval('repair_id_seq'), '";
+            query += repair_date
+            query += "', '"
             query += repair_code
             query += "', '"
             query += pilot_id
@@ -292,6 +323,33 @@ def repairs():
             print("Failed to output list")
             print(e)
     return render_template("repairs.html")
+
+
+@app.route('/schedule', methods=["GET", "POST"])
+def schedule():
+    if request.method == "POST":
+        try:
+            fnum = request.form.get("fnum")
+            departure_time = request.form.get("departure_time")
+            arrival_time = request.form.get("arrival_time")
+
+            query = "INSERT INTO Schedule (id, flightNum, departure_time, arrival_time) Values (nextval('schedule_id_seq'), '"
+            query += fnum
+            query += "', '"
+            query += departure_time
+            query += "', '"
+            query += arrival_time
+            query += "') RETURNING *;"
+
+            result_set = db.engine.execute(query).fetchone()
+            id = result_set[0]
+
+            return render_template("schedule.html", id=id, fnum=fnum, departure_time=departure_time, arrival_time=arrival_time)
+
+        except Exception as e:
+            print("Failed to output list")
+            print(e)
+    return render_template("schedule.html")
 
 @app.route('/', methods=["GET", "POST"])
 def main():

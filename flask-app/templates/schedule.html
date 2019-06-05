@@ -9,7 +9,7 @@
     background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#EA5C54 ), color-stop(100%,#bb6dec)); /* Chrome,Safari4+*/
     background-repeat: no-repeat;
     background-size: cover;
-    height: 200vh;
+    height: 100vh;
     width: 100vw;
   }
 
@@ -71,50 +71,19 @@
       <div class="col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 fill">
       </div>
       <div class="input">
-      <p class=text> 1. Enter Cost </p>
-      <input class="temp" type="text" name="cost">
+      <p class=text> 1. Enter flight number </p>
+      <input class="temp" type="text" name="fnum">
       </div>
 
       <div class="input">
-      <p class=text> 2. Enter num sold</p>
-      <input class="temp" type="text" name="num_sold">
+      <p class=text> 2. Enter departure time </p>
+      <input class="temp" type="text" name="departure_time">
       </div>
 
       <div class="input">
-      <p class=text> 3. Enter num stops</p>
-      <input class="temp" type="text" name="num_stops">
+      <p class=text> 3. Enter arrival time </p>
+      <input class="temp" type="text" name="arrival_time">
       </div>
-
-      <div class="input">
-      <p class=text> 4. Enter actual departure date</p>
-      <input class="temp" type="text" name="actual_departure_date">
-      </div>
-
-      <div class="input">
-      <p class=text> 5. Enter actual arrival date</p>
-      <input class="temp" type="text" name="actual_arrival_date">
-      </div>
-
-      <div class="input">
-      <p class=text> 6. Enter arrival airport</p>
-      <input class="temp" type="text" name="arrival_airport">
-      </div>
-
-      <div class="input">
-      <p class=text> 7. Enter departure airport</p>
-      <input class="temp" type="text" name="departure_airport">
-      </div>
-
-      <div class="input">
-      <p class=text> 8. Enter pilot id</p>
-      <input class="temp" type="text" name="pilot_id">
-      </div>
-
-      <div class="input">
-      <p class=text> 9. Enter plane id</p>
-      <input class="temp" type="text" name="plane_id">
-      </div>
-
 
       <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 fill" text-align=center>
         <input class="submit" type="submit" value="add" style="padding: 20px;">
@@ -123,12 +92,12 @@
     </form>
   </div>
 
-  {% if id is not none %}
-    {{id}} {{cost}} {{num_sold}} {{num_stops}} {{actual_departure_date}} {{actual_arrival_date}} {{arrival_airport}} {{departure_airport}}
-    <br></br>
-    {{id2}} {{pilot_id}} {{plane_id}}
+  {% if fnum is not none %}
+    {{id}}
+    {{fnum}}
+    {{departure_time}}
+    {{arrival_time}}
   {% endif %}
-
 
   </div>
   </body>
