@@ -4,7 +4,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask_sqlalchemy import SQLAlchemy
-from dbinit import query
+#from dbinit import query
 from sqlalchemy import create_engine
 from sqlalchemy import case
 
@@ -35,8 +35,8 @@ def plane():
             result = result_set.fetchone()
 
             id = result[0]
-
-            return render_template("plane.html", id=id, make=make, model=model, age=age, seats=seats)
+            success = "Succesfully inserted "
+            return render_template("plane.html", success=success, id=id, make=make, model=model, age=age, seats=seats)
 
         except Exception as e:
             id = "One or more of the fields was incorrect or empty"
@@ -61,10 +61,11 @@ def pilot():
             result_set = db.engine.execute(query)
             result = result_set.fetchone()
             id = result[0]
+            success = "Succesfully inserted "
             if full_name == "" or nationality == "":
                 id = "One or more of the fields was incorrect or empty"
                 return render_template("pilot.html", id=id)
-            return render_template("pilot.html", id=id, full_name=full_name, nationality=nationality)
+            return render_template("pilot.html", success=success, id=id, full_name=full_name, nationality=nationality)
 
         except Exception as e:
             id = "One or more of the fields was incorrect or empty"
@@ -128,9 +129,9 @@ def flight():
             result2 = result_set2.fetchone()
             id2 = result[0]
 
+            success = "Successfully inserted "
 
-
-            return render_template("flight.html", id=id, cost=cost, num_sold=num_sold, num_stops=num_stops, actual_departure_date=actual_departure_date, actual_arrival_date=actual_arrival_date, arrival_airport=arrival_airport, departure_airport=departure_airport, id2=id2, pilot_id=pilot_id, plane_id=plane_id)
+            return render_template("flight.html", success=success, id=id, cost=cost, num_sold=num_sold, num_stops=num_stops, actual_departure_date=actual_departure_date, actual_arrival_date=actual_arrival_date, arrival_airport=arrival_airport, departure_airport=departure_airport, id2=id2, pilot_id=pilot_id, plane_id=plane_id)
 
         except Exception as e:
             print("Failed to add flight")
@@ -154,7 +155,9 @@ def technician():
             result = result_set.fetchone()
             id = result[0]
 
-            return render_template("technician.html", id=id, full_name=full_name)
+            success = "Successfully inserted "
+
+            return render_template("technician.html", success=success, id=id, full_name=full_name)
 
         except Exception as e:
             print("Failed to add technician")
@@ -200,7 +203,8 @@ def bookflight():
             result = result_set.fetchone()
             id = result[0]
 
-            return render_template("bookflight.html", id=id, cid=cid, fid=fid, status=status)
+            success = "Successfully booked, your status is: "
+            return render_template("bookflight.html", success=success, status=status)
 
         except Exception as e:
             print("Failed to book a flight")
@@ -225,8 +229,10 @@ def listavailable():
             result = result_set.fetchone()
             difference = result[0]
 
+            success = "Seats available: "
 
-            return render_template("listavailable.html", difference=difference)
+
+            return render_template("listavailable.html", success=success, difference=difference)
 
         except Exception as e:
             print("Failed to list availability")
@@ -275,7 +281,9 @@ def countstatus():
             result_set = db.engine.execute(query).fetchone()
             result = result_set[0]
 
-            return render_template("countstatus.html", fnum=fnum, status=status, result=result)
+            success="Number of people with this status: "
+
+            return render_template("countstatus.html", success=success, result=result)
 
         except Exception as e:
             print("Failed to output list")
@@ -291,6 +299,10 @@ def repairs():
             pilot_id = request.form.get("pilot_id")
             plane_id = request.form.get("plane_id")
             technician_id = request.form.get("technician_id")
+
+            if repair_date == "" or repair_code == "" or pilot_id == "" or plane_id == "" or technician_id == "":
+                id = "One or more of the fields are empty, please fill out all fields"
+                return render_template("repairs.html", id=id)
 
             id_1 = int(pilot_id)
             id_2 = int(plane_id)
@@ -316,8 +328,9 @@ def repairs():
 
             result_set = db.engine.execute(query).fetchone()
             id = result_set[0]
+            success = "Successfully inserted "
 
-            return render_template("repairs.html", id=id, repair_date=repair_date, repair_code=repair_code, pilot_id=pilot_id, plane_id=plane_id, technician_id=technician_id)
+            return render_template("repairs.html", success=success, id=id, repair_date=repair_date, repair_code=repair_code, pilot_id=pilot_id, plane_id=plane_id, technician_id=technician_id)
 
         except Exception as e:
             print("Failed to output list")
@@ -333,6 +346,15 @@ def schedule():
             departure_time = request.form.get("departure_time")
             arrival_time = request.form.get("arrival_time")
 
+            fnum_int = int(fnum)
+
+            if fnum == "" or departure_time == "" or arrival_time == "":
+                id = "One or more of the fields are empty, please fill out all fields"
+                return render_template("schedule.html", id=id)
+
+            if fnum_int > 2000:
+                id = "Please enter a valid flight number from 1-2000"
+                return render_template("schedule.html", id=id)
             query = "INSERT INTO Schedule (id, flightNum, departure_time, arrival_time) Values (nextval('schedule_id_seq'), '"
             query += fnum
             query += "', '"
@@ -343,8 +365,9 @@ def schedule():
 
             result_set = db.engine.execute(query).fetchone()
             id = result_set[0]
+            success = "Successfully inserted "
 
-            return render_template("schedule.html", id=id, fnum=fnum, departure_time=departure_time, arrival_time=arrival_time)
+            return render_template("schedule.html", success=success, id=id, fnum=fnum, departure_time=departure_time, arrival_time=arrival_time)
 
         except Exception as e:
             print("Failed to output list")
